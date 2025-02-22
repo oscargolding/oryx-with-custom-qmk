@@ -338,7 +338,7 @@ __attribute__((weak)) bool achordion_chord(uint16_t tap_hold_keycode,
   // Add in custom chords into this fn
   switch (tap_hold_keycode) {
     // Allow WIN + L for quick screen lock using the same hand
-    case MOD_RGUI:
+    case KC_6:
       if (other_keycode == KC_L) { return true; }
       break;
   }
