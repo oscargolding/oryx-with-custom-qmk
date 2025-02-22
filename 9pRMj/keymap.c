@@ -17,7 +17,9 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                      keyrecord_t* tap_hold_record,
                      uint16_t other_keycode,
                      keyrecord_t* other_record) {
+  // This is where key overrides for achordion happens, add them in the switch below
   switch (tap_hold_keycode) {
+    // Allow Win + L for a one hand lock
     case MT(MOD_RGUI, KC_6):
       if (other_keycode == KC_L) { return true; }
       break;
