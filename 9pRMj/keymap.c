@@ -13,12 +13,23 @@ void housekeeping_task_user(void) {
   achordion_task();
 }
 
-#define HRM_WIN MT(MOD_RGUI, KC_6)
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+  switch (tap_hold_keycode) {
+    case MT(MOD_RGUI, KC_6):
+      if (other_keycode == KC_L) { return true; }
+      break;
+  }
+
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    KC_ESCAPE,      KC_1,           MT(MOD_LCTL, KC_2),LT(2,KC_3),     LT(1,KC_4),     MT(MOD_LGUI, KC_5),                                HRM_WIN,LT(1,KC_7),     LT(2,KC_8),     MT(MOD_RCTL, KC_9),KC_0,           KC_DELETE,      
+    KC_ESCAPE,      KC_1,           MT(MOD_LCTL, KC_2),LT(2,KC_3),     LT(1,KC_4),     MT(MOD_LGUI, KC_5),                                MT(MOD_RGUI, KC_6),LT(1,KC_7),     LT(2,KC_8),     MT(MOD_RCTL, KC_9),KC_0,           KC_DELETE,      
     MT(MOD_LALT, KC_GRAVE),KC_Q,           KC_W,           KC_F,           KC_P,           KC_G,                                           KC_J,           KC_L,           KC_U,           KC_Y,           KC_SCLN,        MT(MOD_RALT, KC_SPACE),
     KC_TAB,         KC_A,           KC_R,           KC_S,           KC_T,           KC_D,                                           KC_H,           KC_N,           KC_E,           KC_I,           KC_O,           KC_QUOTE,       
     TO(3),          KC_Z,           KC_X,           KC_C,           KC_V,           KC_B,                                           KC_K,           KC_M,           KC_COMMA,       KC_DOT,         KC_SLASH,       KC_TILD,        
